@@ -4,7 +4,7 @@ WORKDIR /git
 RUN git clone https://github.com/carlespla/bareos_exporter2
 WORKDIR /git/bareos_exporter
 RUN rm go.mod go.sum
-RUN go mod init github.com/carlespla/bareos_exporter
+RUN go mod init github.com/carlespla/bareos_exporter2
 RUN go mod tidy
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o bareos_exporter .
 
