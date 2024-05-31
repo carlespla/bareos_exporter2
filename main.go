@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/carlespla/bareos_exporter/error"
+	"github.com/carlespla/bareos_exporter2/error"
 
 	"flag"
 	"fmt"
@@ -28,7 +28,7 @@ var (
 
 func init() {
 	flag.Usage = func() {
-		fmt.Println("Usage: bareos_exporter [ ... ]\n\nParameters:")
+		fmt.Println("Usage: bareos_exporter2 [ ... ]\n\nParameters:")
 		fmt.Println()
 		flag.PrintDefaults()
 	}
