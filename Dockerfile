@@ -1,9 +1,9 @@
 FROM golang as builder
 RUN mkdir /git
 WORKDIR /git
-RUN git clone https://github.com/carlespla/bareos_exporter2
+RUN git clone https://github.com/carlespla/bareos_exporter2:latest
 WORKDIR /git/bareos_exporter2
-RUN rm go.mod go.sum bareos_exporter2
+RUN rm -f go.mod go.sum bareos_exporter2
 RUN go mod init github.com/carlespla/bareos_exporter2
 RUN go mod tidy
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o bareos_exporter2 .
