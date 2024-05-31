@@ -88,6 +88,7 @@ func (collector *bareosMetrics) Describe(ch chan<- *prometheus.Desc) {
 
 func (collector *bareosMetrics) Collect(ch chan<- prometheus.Metric) {
 	connection, connectionErr := dataaccess.GetConnection(connectionString)
+	log.Info("Collector . ", connection, connectionErr)
 
 	defer connection.DB.Close()
 
