@@ -3,9 +3,10 @@ package dataaccess
 import (
 	"database/sql"
 	"fmt"
-	"github.com/carlespla/bareos_exporter/types"
-	_ "github.com/go-sql-driver/mysql" // Keep driver import and usage (in GetConnection) in one file
 	"time"
+
+	"github.com/carlespla/bareos_exporter2/types"
+	_ "github.com/go-sql-driver/mysql" // Keep driver import and usage (in GetConnection) in one file
 )
 
 type connection struct {

@@ -2,7 +2,7 @@ FROM golang as builder
 RUN mkdir /git
 WORKDIR /git
 RUN git clone https://github.com/carlespla/bareos_exporter2
-WORKDIR /git/bareos_exporter
+WORKDIR /git/bareos_exporter2
 RUN rm go.mod go.sum
 RUN go mod init github.com/carlespla/bareos_exporter2
 RUN go mod tidy
@@ -16,10 +16,10 @@ ENV sql_username root
 ENV endpoint /metrics
 ENV port 9625
 
-WORKDIR /bareos_exporter
-COPY --from=builder /git/bareos_exporter bareos_exporter
-RUN chmod +x /bareos_exporter/bareos_exporter/bareos_exporter
+WORKDIR /bareos_exporter2
+COPY --from=builder /git/bareos_exporter2 bareos_exporter
+RUN chmod +x /bareos_exporter2/bareos_exporter2/bareos_exporter
 
 
-CMD ./bareos_exporter/bareos_exporter -port $port -endpoint $endpoint -u $sql_username -h $sql_server -P $sql_port -p pw/auth
+CMD ./bareos_exporter2/bareos_exporter -port $port -endpoint $endpoint -u $sql_username -h $sql_server -P $sql_port -p pw/auth
 EXPOSE $port
