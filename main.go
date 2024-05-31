@@ -41,11 +41,13 @@ func main() {
 	error.Check(err)
 
 	connectionString = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", *mysqlUser, strings.TrimSpace(string(pass)), *mysqlHostname, *mysqlPort, *mysqlDb)
+	log.Info("Starting ...")
 	collector := bareosCollector()
+	log.Info("Conecting ...", collector)
 	prometheus.MustRegister(collector)
 
 	http.Handle(*exporterEndpoint, promhttp.Handler())
-	log.Info("Beginning to server on port 2 ", *exporterPort)
+	log.Info("Beginning to server on port ", *exporterPort)
 
 	addr := fmt.Sprintf(":%d", *exporterPort)
 	log.Fatal(http.ListenAndServe(addr, nil))
