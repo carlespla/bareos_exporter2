@@ -98,6 +98,7 @@ func (collector *bareosMetrics) Collect(ch chan<- prometheus.Metric) {
 	}
 
 	var servers, getServerListErr = connection.GetServerList()
+	log.Info("Collector Server list. ", servers, getServerListErr)
 
 	if getServerListErr != nil {
 		log.Error(getServerListErr)
