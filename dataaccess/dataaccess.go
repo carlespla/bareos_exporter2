@@ -7,6 +7,7 @@ import (
 
 	"github.com/carlespla/bareos_exporter2/types"
 	_ "github.com/go-sql-driver/mysql" // Keep driver import and usage (in GetConnection) in one file
+	log "github.com/sirupsen/logrus"
 )
 
 type connection struct {
@@ -17,7 +18,7 @@ type connection struct {
 func GetConnection(connectionString string) (*connection, error) {
 	var connection connection
 	var err error
-
+	log.Info("Init mysql | ", connectionString)
 	connection.DB, err = sql.Open("mysql", connectionString)
 
 	return &connection, err
@@ -26,6 +27,7 @@ func GetConnection(connectionString string) (*connection, error) {
 // GetServerList reads all servers with scheduled backups for current date
 func (connection connection) GetServerList() ([]string, error) {
 	date := fmt.Sprintf("%s%%", time.Now().Format("2006-01-02"))
+	log.Info("SELECT DISTINCT Name FROM Job WHERE SchedTime LIKE ?", date)
 	results, err := connection.DB.Query("SELECT DISTINCT Name FROM Job WHERE SchedTime LIKE ?", date)
 
 	if err != nil {
