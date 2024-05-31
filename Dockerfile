@@ -1,7 +1,7 @@
 FROM golang as builder
 RUN mkdir /git
 WORKDIR /git
-RUN git clone https://github.com/carlespla/bareos_exporter
+RUN git clone https://github.com/carlespla/bareos_exporter2
 WORKDIR /git/bareos_exporter
 RUN rm go.mod go.sum
 RUN go mod init github.com/carlespla/bareos_exporter
